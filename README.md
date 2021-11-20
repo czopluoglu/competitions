@@ -1,3 +1,1 @@
-# Kaggle
-
-Repository for the code to play with datasets in the Kaggle competitions
+Repository for the code to play with datasets in the data science competitions (e.g., Kaggle, Challenge.gov)
