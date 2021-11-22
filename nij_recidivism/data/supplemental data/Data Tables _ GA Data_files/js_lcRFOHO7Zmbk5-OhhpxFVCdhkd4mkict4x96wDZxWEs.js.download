@@ -1,0 +1,37 @@
+/**
+ * A JavaScript file that corrects double encoding of HTML entities in <select> widgets.
+ */
+ 
+ // JavaScript should be made compatible with libraries other than jQuery by
+// wrapping it with an "anonymous closure". See:
+// - http://drupal.org/node/1446420
+// - http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth
+(function ($) {
+  Drupal.behaviors.double_encoding_correction = {
+
+    attach: function(context, settings) {
+        var replace = function (txt) {
+            if (txt && txt.replace) {
+                return txt.replace(/&amp;/g, "&").replace(/&#039;/g, "'").replace(/&quot;/g, '"');
+            } else {
+                return txt;
+            }
+        };
+      //Change &amp;, &#039; and &quot; to &, ' and " in select list options
+      $('select option').each(function() {
+        var text = $(this).text();
+          var replaced = replace(text);
+        $(this).text(replaced);
+      });
+        $('img').each(function () {
+            var alt = $(this).attr('alt');
+            var replaced = replace(alt);
+            $(this).attr('alt', replaced);
+            var title = $(this).attr('title');
+            replaced = replace(title);
+            $(this).attr('title', replaced);
+      });
+    }
+  };
+})(jQuery);
+;
